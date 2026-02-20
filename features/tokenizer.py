@@ -15,13 +15,17 @@ def tokenizeSents(sents:str) -> list[str]:
     tokens = detector.tokenize(sents.strip())
     return tokens
 
+def removePunctuation(tokens: list[str]) -> list[str]:
+    punctuation = [".",",",":","?",";","!"]
+    for punc in punctuation:
+        tokens = [x for x in tokens if x != punc]
+    return tokens
+
 def tokenizeSent(sent:str, PunctuationRemoved=False) -> list[str]:
     tokenizer = StanfordTokenizer()
     tokens = tokenizer.tokenize(sent)
     
     if PunctuationRemoved:
-        punctuation = [".",",",":","?",";","!"]
-        for punc in punctuation:
-            tokens = [x for x in tokens if x != punc]
+        tokens = removePunctuation(tokens)
     return tokens
 
